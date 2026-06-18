@@ -3,7 +3,6 @@
 #' Requires:
 #' - R/libs.R
 
-# load required libraries
 source("R/libs.R")
 required = c("ggplot2") 
 libs(required)

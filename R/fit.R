@@ -5,7 +5,6 @@ fit = function(
 ){
   #'@param data A data frame containing the variables in the model. Must include a response column and a covariate column.
   #'@return Fitted model object.
-  #' 
   
   # type checking
   if (!is.data.frame(data)) {
