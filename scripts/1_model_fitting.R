@@ -13,7 +13,7 @@ source("R/plot.R")
 source("R/libs.R")
 
 # libraries --------------------------------------------------------------
-required = c("config")
+required = c("config", "ggplot2")
 libs(required)
 
 # config -----------------------------------------------------------------
