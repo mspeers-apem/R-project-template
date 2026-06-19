@@ -22,7 +22,7 @@ plot = function(model){
   # create the plot
   p = ggplot(data, aes(x = covariate, y = response)) +
     geom_point() +  # original data points
-    geom_smooth(method = "lm", se = FALSE, color = "blue") +  # fitted line
+    geom_abline(intercept = coef(model)[1], slope = coef(model)[2], color = "red") +  # fitted line from model
     labs(title = "Fitted Linear Model", x = "Covariate", y = "Response") +
     theme_minimal()
 
