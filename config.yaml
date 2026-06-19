@@ -1,4 +1,8 @@
 default:
+
+  # global random seed
+  seed: 12345
+
   normal:
     # number of samples
     n_samples: 1000

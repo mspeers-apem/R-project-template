@@ -17,20 +17,21 @@ required = c("config", "ggplot2")
 libs(required)
 
 # config -----------------------------------------------------------------
-config = config::get(file = "config.yaml") # load config file
+cfg = config::get(file = "config.yaml") # load config file
+set.seed(cfg$seed) 
 
 # generate data ----------------------------------------------------------
 covariate = rnorm(
-  config$normal$n_samples,
-  mean = config$normal$mean,
-  sd = config$normal$std_dev
+  cfg$normal$n_samples,
+  mean = cfg$normal$mean,
+  sd = cfg$normal$std_dev
 )
 response = rnorm(
-  config$normal$n_samples,
+  cfg$normal$n_samples,
   mean = covariate,
-  sd = config$regression$noise
+  sd = cfg$regression$noise
 ) +
-  config$regression$slope * covariate
+  cfg$regression$slope * covariate
 data = data.frame(
   covariate = covariate,
   response = response
@@ -46,6 +47,6 @@ print(p)
 ggsave(
   p,
   filename = "outputs/figures/fitted_model_plot.png",
-  width = config$plot$width,
-  height = config$plot$height
+  width = cfg$plot$width,
+  height = cfg$plot$height
 ) # save plot

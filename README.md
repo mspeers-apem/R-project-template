@@ -18,7 +18,7 @@ TEMPLATE/
 ├── config.yaml
 └── README.md
 ```
-and all other files contain examples of good practice.
+and all other files contain examples of what's discussed here.
 
 ## 1: Function - script structure
 
@@ -65,7 +65,7 @@ data = read.csv("data/data.csv")
 model = fit_model(data)
 ```
 
-With this structure, it is easy to go in and make a quick change to the likelihood function without having to scroll through a long analysis script or change the likelihood in multiple places. 
+With this structure, it is easy to go in and modify portions of the code. For example, you could make a quick change to the likelihood function without having to scroll through a long analysis script or change the likelihood in multiple places. 
 
 ## 2 - Seperating pre-processing, analysis, and plotting
 
@@ -83,7 +83,7 @@ to be used in their respective scripts:
 
 Keeping each step modular in this way makes changing individual components easier. E.g., if you want to adjust plotting parameters you can modify the `plot.R` function file and then rerun the `3_model_plotting.R` script; this avoids needing to rerun the data processing and model fitting steps, and also makes it simpler to find the part you need to modify.
 
-Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section.
+Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section. 
 
 ## 3 - Clearing the environment
 
@@ -104,7 +104,7 @@ The `config.yaml` file allows you to define parameters in a single location and 
 family = "cnorm"
 fit = gam(data, family = family)
 ```
-but then if you want to change the family you need to scroll to that line the analysis script. Additionally, if you want to change the family for multiple models, then you will need to copy and paste this changes in multiple locations. 
+but then if you want to change the family you need to scroll to that line the analysis script. Additionally, if you want to change the family for multiple models, then you will need to copy and paste this change in multiple locations. 
 
 Instead, you can add to `config.yaml`:
 
