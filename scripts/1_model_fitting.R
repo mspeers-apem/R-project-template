@@ -37,6 +37,8 @@ data = data.frame(
   response = response
 )
 
+saveRDS(data, "data/simulated_data.rds") # save simulated data
+
 # fit model ---------------------------------------------------------------
 model = fit(data)
 saveRDS(model, "outputs/models/fitted_model.rds") # save fitted model object
