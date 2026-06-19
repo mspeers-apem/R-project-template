@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository is intended to provide general guidance on structuring R projects. There aren't any hard rules, but I've found that organising things in this way helps to make code more maintanable and expandable. 
+This repository is intended to provide general guidance on structuring R projects. There aren't any hard rules, but I've found that organising things in this way helps to make code more maintainable and expandable. 
 
 The generic structure of the template is
 ```
@@ -22,7 +22,7 @@ and all other files contain examples of good practice.
 
 ## 1: Function - script structure
 
-The main idea of this template is to split the definition and execution of functions into seperate files, like you would in an R package. This makes scripts more readable and reduces the need for copy and paste, since all of the main methods will be coded in a single place separate from anaylses. It's also a lot easier to then find where you've coded a particular method (i.e., in a specific function file) and then change how the method is implemented. 
+The main idea of this template is to split the definition and execution of functions into separate files, like you would in an R package. This makes scripts more readable and reduces the need for copy and paste, since all of the main methods will be coded in a single place separate from analyses. It's also a lot easier to then find where you've coded a particular method (i.e., in a specific function file) and then change how the method is implemented. 
 
 Functions go in the R/ folder (like in an R package). Some function files will just have a single function, and others will have a 'main' function and a selection of 'helper' functions which are used by the main function. For example, you might have a main function which fits a custom model, and a helper function which evaluates the log-likelihood. Your file would then look like this:
 
@@ -69,7 +69,7 @@ With this structure, it is easy to go in and make a quick change to the likeliho
 
 ## 2 - Seperating pre-processing, analysis, and plotting
 
-Functions and scripts should be seperated by purpose, such as pre-processing, analysis, and plotting. This keeps methods modular and makes it easier to modify output. For example, you might have function files:
+Functions and scripts should be separated by purpose, such as pre-processing, analysis, and plotting. This keeps methods modular and makes it easier to modify output. For example, you might have function files:
 
 - R/process.R
 - R/model.R
@@ -85,16 +85,16 @@ Keeping each step modular in this way makes changing individual components easie
 
 Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section.
 
-## 4 - Clearing the environment
+## 3 - Clearing the environment
 
-It is good practice to clear the working environment at the beginning of each script by running:
+It is good practice to run scripts in a clean working environment. This can be done by running:
 
 ```r
 rm(list = ls())
 ```
-This helps avoid situations where variables from other scripts or previous script versions are still defined, which can lead to errors in analysis. Any outputs which take a long time to generate can be saved and loaded in.
+at the start of a script to clear the working environment. This helps avoid situations where variables from other scripts or previous script versions are still defined, which can lead to errors in analysis.
 
-## 5 - Configuration file 
+## 4 - Configuration file 
 
 Some projects will have lots of hard-coded parameters. These values are difficult to keep track of if they are scattered throughout analysis scripts. The `config.yaml` file can be used to avoid this situation.
 
@@ -126,9 +126,9 @@ now, changing the line in `config.yaml` to `family: "clognorm"` will change the 
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-## 6 - Loading libraries
+## 5 - Loading libraries
 
-This template repository inclues the `R/libs.R` function file, containing the function:
+This template repository includes the `R/libs.R` function file, containing the function:
 
 ```R
 libs = function(pkg){
