@@ -15,6 +15,7 @@ TEMPLATE/
 ├── R/
 │   └── libs.R
 ├── scripts/
+├── .gitignore
 ├── config.yaml
 └── README.md
 ```
