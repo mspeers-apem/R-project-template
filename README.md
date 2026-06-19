@@ -146,3 +146,12 @@ libs = function(pkg){
 Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN.
 
 This helps other people when they first run the script, so they don't need to individually install required packages.
+
+## 6 - Git advice
+
+For general Git advice, I've found these resources helpful:
+
+- [Command line help](https://git-scm.com/docs/gittutorial)
+- [Positron/VScode help](https://code.visualstudio.com/docs/sourcecontrol/overview)
+
+Particularly, the sections on managing branches and stashes contain good advice for managing conflicts when working with people on the same repository.
