@@ -1,9 +1,9 @@
 default:
 
   # global random seed
-  seed: 12345
+  SEED: 12345
 
-  normal:
+  NORMAL:
     # number of samples
     NSAMPLES: 1000
     # mean of the normal distribution
@@ -11,14 +11,22 @@ default:
     # standard deviation of the normal distribution
     STDDEV: 1.0
 
-  regression:
+  REGRESSION:
     # slope of regression
     SLOPE: 2.0
     # white noise variance
     NOISE: 2.0
 
-  plot:
+  PLOT:
     # width
     WIDTH: 10
     # height
     HEIGHT: 6
+
+  PATH:
+    # path to save figures
+    FIGURE: "outputs/figures"
+    # path to save models
+    MODEL: "outputs/models"
+    # path to save data
+    DATA: "data"

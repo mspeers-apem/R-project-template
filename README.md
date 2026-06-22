@@ -14,10 +14,17 @@ TEMPLATE/
 │   └── models/
 ├── R/
 │   └── libs.R
+├── renv/
+│   ├── .gitignore
+│   ├── activate.R
+│   └── settings.json
 ├── scripts/
 ├── .gitignore
+├── .Rprofile
 ├── config.yaml
-└── README.md
+├── README.md
+└── renv.lock
+
 ```
 and all other files contain examples of what's discussed here.
 
@@ -102,8 +109,8 @@ Instead, you can add to `config.yaml`:
 
 ```yaml
 default:
-    gam:
-        family: "cnorm"
+    GAM:
+        FAMILY: "cnorm"
 ```
 
 and then in your script do
@@ -111,16 +118,40 @@ and then in your script do
 ```r
 library(config)
 cfg = config::get()
-fit = gam(data, family = cfg$gam$family)
+fit = gam(data, family = cfg$GAM$FAMILY)
 ```
 
-now, changing the line in `config.yaml` to `family: "clognorm"` will change the GAM family for all model fits, in all scripts which use the config file.
+now, changing the line in `config.yaml` to `FAMILY: "clognorm"` will change the GAM family for all model fits, in all scripts which use the config file.
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-## 4 - Loading libraries
+## 4 - Virtual environments with `renv`
 
-This template repository includes the `R/libs.R` function file, containing the function:
+The `renv` package is used to create a separate R environment for a particular project. This ensures packages and package versions used in the project are consistent. `renv` can also be used to automatically install required pacakges. To initialize a new `renv` environment, run:
+
+```r
+install.packages("renv")
+renv::init()
+```
+
+This will create a `renv` directory and a `renv.lock` file that records the state of the project's library. `renv::init()` will scan for any instances of a package being used (e.g., `library(package)`, `require(package)`, and `package::function()`) in your scripts and then add that package to the lock file. This installs them to the project environment.
+
+You can then load that environment on another machine, using:
+
+```r
+renv::restore()
+```
+
+To add a new package (say `ggplot2`), first install the package and then add it to the lock file with:
+
+```r
+install.packages("ggplot2")
+renv::snapshot()
+```
+
+## 5 - Automatically installing and loading libraries
+
+Alternatively, if you don't want to use `renv`, I've found this function helpful:
 
 ```R
 libs = function(pkg){
@@ -134,16 +165,14 @@ libs = function(pkg){
   sapply(pkg, require, character.only = TRUE)
 }
 ```
+It is included in the `R/libs.R` function file. Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN. Note too that this function won't guarentee you get the same version of a package as the original script writer.
 
-Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN.
-
-This helps other people when they first run the script, so they don't need to individually install required packages.
-
-## 5 - Git advice
+## 6 - Git advice
 
 For general Git advice, I've found these resources helpful:
 
 - [Command line help](https://git-scm.com/docs/gittutorial)
+- [RStudio help](https://happygitwithr.com/)
 - [Positron/VScode help](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
 Particularly, the sections on managing branches and stashes contain good advice for managing conflicts when working with people on the same repository.

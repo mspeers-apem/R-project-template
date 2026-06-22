@@ -13,42 +13,42 @@ source("R/plot.R")
 source("R/libs.R")
 
 # libraries --------------------------------------------------------------
-required = c("config", "ggplot2")
-libs(required)
+library(config) 
+library(ggplot2)
 
 # config -----------------------------------------------------------------
 cfg = config::get(file = "config.yaml") # load config file
-set.seed(cfg$seed) 
+set.seed(cfg$SEED) 
 
 # generate data ----------------------------------------------------------
 covariate = rnorm(
-  cfg$normal$NSAMPLES,
-  mean = cfg$normal$MEAN,
-  sd = cfg$normal$STDDEV
+  cfg$NORMAL$NSAMPLES,
+  mean = cfg$NORMAL$MEAN,
+  sd = cfg$NORMAL$STDDEV
 )
 response = rnorm(
-  cfg$normal$NSAMPLES,
+  cfg$NORMAL$NSAMPLES,
   mean = covariate,
-  sd = cfg$regression$NOISE
+  sd = cfg$REGRESSION$NOISE
 ) +
-  cfg$regression$SLOPE * covariate
+  cfg$REGRESSION$SLOPE * covariate
 data = data.frame(
   covariate = covariate,
   response = response
 )
 
-saveRDS(data, "data/simulated_data.rds") # save simulated data
+saveRDS(data, paste0(cfg$PATH$DATA, "/simulated_data.rds")) # save simulated data
 
 # fit model ---------------------------------------------------------------
 model = fit(data)
-saveRDS(model, "outputs/models/fitted_model.rds") # save fitted model object
+saveRDS(model, paste0(cfg$PATH$MODEL, "/fitted_model.rds")) # save fitted model object
 
 # plot model --------------------------------------------------------------
 p = plot(model)
 print(p)
 ggsave(
   p,
-  filename = "outputs/figures/fitted_model_plot.png",
-  width = cfg$plot$WIDTH,
-  height = cfg$plot$HEIGHT
+  filename = paste0(cfg$PATH$FIGURE, "/fitted_model_plot.png"),
+  width = cfg$PLOT$WIDTH,
+  height = cfg$PLOT$HEIGHT
 ) # save plot
