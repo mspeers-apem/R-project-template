@@ -22,16 +22,16 @@ set.seed(cfg$seed)
 
 # generate data ----------------------------------------------------------
 covariate = rnorm(
-  cfg$normal$n_samples,
-  mean = cfg$normal$mean,
-  sd = cfg$normal$std_dev
+  cfg$normal$NSAMPLES,
+  mean = cfg$normal$MEAN,
+  sd = cfg$normal$STDDEV
 )
 response = rnorm(
-  cfg$normal$n_samples,
+  cfg$normal$NSAMPLES,
   mean = covariate,
-  sd = cfg$regression$noise
+  sd = cfg$regression$NOISE
 ) +
-  cfg$regression$slope * covariate
+  cfg$regression$SLOPE * covariate
 data = data.frame(
   covariate = covariate,
   response = response
@@ -49,6 +49,6 @@ print(p)
 ggsave(
   p,
   filename = "outputs/figures/fitted_model_plot.png",
-  width = cfg$plot$width,
-  height = cfg$plot$height
+  width = cfg$plot$WIDTH,
+  height = cfg$plot$HEIGHT
 ) # save plot

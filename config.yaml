@@ -5,20 +5,20 @@ default:
 
   normal:
     # number of samples
-    n_samples: 1000
+    NSAMPLES: 1000
     # mean of the normal distribution
-    mean: 0.0
+    MEAN: 0.0
     # standard deviation of the normal distribution
-    std_dev: 1.0
+    STDDEV: 1.0
 
   regression:
     # slope of regression
-    slope: 2.0
+    SLOPE: 2.0
     # white noise variance
-    noise: 2.0
+    NOISE: 2.0
 
   plot:
     # width
-    width: 10
+    WIDTH: 10
     # height
-    height: 6
+    HEIGHT: 6
