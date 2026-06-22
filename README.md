@@ -86,16 +86,7 @@ Keeping each step modular in this way makes changing individual components easie
 
 Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section. 
 
-## 3 - Clearing the environment
-
-It is good practice to run scripts in a clean working environment. This can be done by running:
-
-```r
-rm(list = ls())
-```
-at the start of a script to clear the working environment. This helps avoid situations where variables from other scripts or previous script versions are still defined, which can lead to errors in analysis.
-
-## 4 - Configuration file 
+## 3 - Configuration file 
 
 Some projects will have lots of hard-coded parameters. These values are difficult to keep track of if they are scattered throughout analysis scripts. The `config.yaml` file can be used to avoid this situation.
 
@@ -127,7 +118,7 @@ now, changing the line in `config.yaml` to `family: "clognorm"` will change the 
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-## 5 - Loading libraries
+## 4 - Loading libraries
 
 This template repository includes the `R/libs.R` function file, containing the function:
 
@@ -148,7 +139,7 @@ Providing this function with a vector of required package names will install the
 
 This helps other people when they first run the script, so they don't need to individually install required packages.
 
-## 6 - Git advice
+## 5 - Git advice
 
 For general Git advice, I've found these resources helpful:
 
