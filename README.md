@@ -125,9 +125,15 @@ now, changing the line in `config.yaml` to `FAMILY: "clognorm"` will change the 
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-## 4 - Virtual environments with `renv`
+## 4 - File paths
 
-The `renv` package is used to create a separate R environment for a particular project. This ensures packages and package versions used in the project are consistent. `renv` can also be used to automatically install required pacakges. To initialize a new `renv` environment, run:
+It's better to use relative file paths (`R/fit.R`) rather than absolute file paths (`Users/Speersm/.../R/fit.R`), so that scripts are immediately repeatable on other people's machines.
+
+Any file paths used throughout the project can be added to `config.yaml` and then loaded in with other fixed parameters.
+
+## 5 - Virtual environments with `renv`
+
+The `renv` package is used to create a separate R environment for a particular project. This ensures packages and package versions used in the project are consistent. `renv` can also be used to automatically install required packages. To initialize a new `renv` environment, run:
 
 ```r
 install.packages("renv")
@@ -165,7 +171,7 @@ libs = function(pkg){
   sapply(pkg, require, character.only = TRUE)
 }
 ```
-It is included in the `R/libs.R` function file. Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN. Note too that this function won't guarentee you get the same version of a package as the original script writer.
+It is included in the `R/libs.R` function file. Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN. Note that this function won't guarantee you get the same version of a package as the original script writer.
 
 ## 6 - Git advice
 
