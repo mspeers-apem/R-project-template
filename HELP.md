@@ -116,7 +116,6 @@ default:
 and then in your script do
 
 ```r
-library(config)
 cfg = config::get()
 fit = gam(data, family = cfg$GAM$FAMILY)
 ```
@@ -124,6 +123,8 @@ fit = gam(data, family = cfg$GAM$FAMILY)
 now, changing the line in `config.yaml` to `FAMILY: "clognorm"` will change the GAM family for all model fits, in all scripts which use the config file.
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
+
+### NOTE: I've found that loading the config package with `library(config)` can break `mgcv::bam`.
 
 ## 4 - File paths
 
