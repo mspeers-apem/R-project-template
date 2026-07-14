@@ -124,7 +124,7 @@ now, changing the line in `config.yaml` to `FAMILY: "clognorm"` will change the 
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-### NOTE: I've found that loading the config package with `library(config)` can break `mgcv::bam`.
+### NOTE: I've found that loading the config package with `library(config)` can break `mgcv::bam`. You can instead just do `cfg = config::get()`.
 
 ## 4 - File paths
 
