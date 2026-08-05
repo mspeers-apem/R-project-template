@@ -156,7 +156,7 @@ install.packages("ggplot2")
 renv::snapshot()
 ```
 
-## 5 - Automatically installing and loading libraries
+## 6 - Automatically installing and loading libraries
 
 Alternatively, if you don't want to use `renv`, I've found this function helpful:
 
@@ -174,7 +174,7 @@ libs = function(pkg){
 ```
 It is included in the `R/libs.R` function file. Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN. Note that this function won't guarantee you get the same version of a package as the original script writer.
 
-## 6 - Git advice
+## 7 - Git advice
 
 For general Git advice, I've found these resources helpful:
 
