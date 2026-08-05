@@ -22,8 +22,6 @@ TEMPLATE/
 ├── docs/
 │   └── report.txt
 │
-├── implicit/
-│
 ├── outputs/
 │   ├── figures/
 │   │   └── fitted_model_plot.png
