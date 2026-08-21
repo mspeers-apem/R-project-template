@@ -1,4 +1,6 @@
-@REM Runs all trend scripts in order using parameters specified in config file.
+@REM This .bat file does the same as run_all.R, but can be run in the windows terminal without opening RStudio.
+@REM If you do not need to run this in the terminal, you can just use run_all.R instead.
+
 @REM To use this, open the terminal and run "scripts/run_all.bat" from the project root directory.
 @REM You might need to change the path to Rscript.exe in the script below if you have a different version of R installed, or if you installed R in a different location.
 @REM You will need to change the path to each script to the correct location your machine.
