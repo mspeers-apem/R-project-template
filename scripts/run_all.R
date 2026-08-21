@@ -45,7 +45,7 @@ run_script <- function(script, args = character()) {
 }
  
 # Run Scripts ------------------------------------------------------------
-run_script("1_model_fitting.R") # First, generate example data and fit a linear model
-run_script("2_model_plotting.R") # Second, plot the fitted model against original data
+run_script("1_model_fitting.R", c("wrapper")) # First, generate example data and fit a linear model
+run_script("2_model_plotting.R", c("wrapper")) # Second, plot the fitted model against original data
 
 message("All scripts completed successfully.")

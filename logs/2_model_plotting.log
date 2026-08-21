@@ -1,3 +1,4 @@
 Loading required package: ggplot2
+Script is being run with command line argument: wrapper
 Fitted model loaded from outputs/models/fitted_model.rds
 Fitted model plot saved to outputs/figures/fitted_model_plot.png

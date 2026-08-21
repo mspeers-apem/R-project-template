@@ -10,6 +10,15 @@ source("R/fit.R")
 cfg <- config::get(file = "config.yml") # load config file
 set.seed(cfg$SEED)
 
+# check for command line arguments ---------------------------------------
+if (length(commandArgs(trailingOnly = TRUE)) > 0) {
+  args <- commandArgs(trailingOnly = TRUE)
+  arg1 <- args[1]
+  message("Script is being run with command line argument: ", arg1)
+} else {
+  message("Script is being run without command line arguments.")
+}
+
 # generate data ----------------------------------------------------------
 message("Generating simulated data...")
 covariate <- rnorm(

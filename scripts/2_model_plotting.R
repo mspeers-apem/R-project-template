@@ -15,6 +15,15 @@ library(ggplot2)
 # config -----------------------------------------------------------------
 cfg <- config::get(file = "config.yml") # load config file
 
+# check for command line arguments ---------------------------------------
+if (length(commandArgs(trailingOnly = TRUE)) > 0) {
+  args <- commandArgs(trailingOnly = TRUE)
+  arg1 <- args[1]
+  message("Script is being run with command line argument: ", arg1)
+} else {
+  message("Script is being run without command line arguments.")
+}
+
 # loading model ----------------------------------------------------------
 model <- readRDS(paste0(cfg$PATH$MODEL, "/fitted_model.rds")) # load fitted model object
 message("Fitted model loaded from ", cfg$PATH$MODEL, "/fitted_model.rds")

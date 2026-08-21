@@ -156,23 +156,16 @@ install.packages("ggplot2")
 renv::snapshot()
 ```
 
-## 6 - Automatically installing and loading libraries
+## 6 - Command line arguments
 
-Alternatively, if you don't want to use `renv`, I've found this function helpful:
+## 7 - Wrapper script with logging
 
-```R
-libs = function(pkg){
-  if (!is.character(pkg)) {
-    stop("Input pkg must be a character vector of package names.")
-  }
+The script `run_all.R` has been set up to run all of the other files in the `scripts/` folder in order, i.e., `1_model_fitting.R` -> `2_model_plotting.R`. This is useful when you want to run your modular workflow all together from start to end.
 
-  new.pkg = pkg[!(pkg %in% installed.packages()[, "Package"])]
-  if (length(new.pkg)) 
-    install.packages(new.pkg, dependencies = TRUE)
-  sapply(pkg, require, character.only = TRUE)
-}
-```
-It is included in the `R/libs.R` function file. Providing this function with a vector of required package names will install them (if not already installed) and then load them. For this to work, the packages must be on CRAN. Note that this function won't guarantee you get the same version of a package as the original script writer.
+It relies on the `run_script()` function defined at the top. This function takes a script name and a vector of additional arguments to pass to a script
+
+To set it up for a new project, change the 
+
 
 ## 7 - Git advice
 
