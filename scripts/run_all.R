@@ -1,5 +1,13 @@
-# Runs all scripts in order using parameters specified in config file.
+#' Runs all scripts in order using parameters specified in config file.
+#'
+#' The function run_script() will run a script with optional arguments, and save the output to a log file.
+#' If a script fails, the wrapper will stop execution and print an error message.
+#' 
+#' To modify this script for your project, you need to:
+#' - change the scripts in the run_script() calls at the bottom of this file.
+#' - change the directory parameter in config.yml to the correct path for your project. 
 
+# set up and run script function -----------------------------------------
 cfg <- config::get()
 scripts_dir <- file.path(cfg$directory, "scripts")
 logs_dir <- file.path(cfg$directory, "logs")
@@ -38,8 +46,8 @@ run_script <- function(script, args = character()) {
     )
   }
 }
-
-# Run scripts in order
+ 
+# Run Scripts ------------------------------------------------------------
 run_script("1_model_fitting.R") # First, generate example data and fit a linear model
 run_script("2_model_plotting.R") # Second, plot the fitted model against original data
 
