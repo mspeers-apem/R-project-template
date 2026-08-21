@@ -1,5 +1,8 @@
 default:
 
+  # directory where the project is located - this will need to be changed if you want to use wrapper script "run_all.R"
+  directory: "C:/Users/M.Speers/OneDrive - Apem Limited/Documents/Misc Code/template"
+
   # global random seed
   SEED: 12345
 
