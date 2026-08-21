@@ -9,6 +9,7 @@ The generic structure of the template is
 TEMPLATE/
 ├── data/
 ├── docs/
+├── logs/
 ├── outputs/
 │   ├── figures/
 │   └── models/
@@ -158,16 +159,61 @@ renv::snapshot()
 
 ## 6 - Command line arguments
 
+Command line arguments are extra parameters that you can pass to a script when running it from the command line. This can be done by adding this code near the top of a script:
+
+```r
+args <- commandArgs(trailingOnly = TRUE)
+par1 <- args[1]
+par2 <- args[2]
+...etc
+```
+This will read in command line arguments and set them as parameters to be used in the script. It's also good to check that arguments have actually been passed, and if not set them to their default values (typically as defined in the config file). e.g.,:
+
+```r
+if (length(commandArgs(trailingOnly = TRUE)) > 0) {
+  args <- commandArgs(trailingOnly = TRUE)
+  par1 <- args[1]
+  par2 <- args[2]
+  ...etc
+} else {
+  par1 <- cfg$par1
+  par2 <- cfg$par2
+  ...etc
+}
+
+```
+One of the reasons behind setting up command line arguments is explained in the next section.
+
 ## 7 - Wrapper script with logging
 
 The script `run_all.R` has been set up to run all of the other files in the `scripts/` folder in order, i.e., `1_model_fitting.R` -> `2_model_plotting.R`. This is useful when you want to run your modular workflow all together from start to end.
 
-It relies on the `run_script()` function defined at the top. This function takes a script name and a vector of additional arguments to pass to a script
+It relies on the `run_script()` function defined at the top. This function takes a script name and a vector of command line arguments to pass to the script. It also saves the console output of the script to a log file of the same name in the `logs/` directory.
 
-To set it up for a new project, change the 
+To set it up for a new project, change the calls of `run_script()` at the bottom of `run_all.R`:
+
+```r
+run_script("1_model_fitting.R", c("wrapper")) # First, generate example data and fit a linear model
+run_script("2_model_plotting.R", c("wrapper")) # Second, plot the fitted model against original data
+```
+
+### Why command line arguments?
+
+The main use of command line arguments is if you want to create a fixed workflow which involves running the same script twice but with different settings. For example, say you have `3_fit_gam.R` which fits a GAM, and you want to create a workflow in `run_all.R` which fits the GAM using `cnorm` and `clognorm` GAM families.
+
+You can set `3_fit_gam.R` to accept the family as a command line argument and then run:
+
+```r
+run_script("3_fit_gam.R", c("cnorm"))
+run_script("3_fit_gam.R", c("clognorm"))
+```
+
+This is useful if you have well-designed modular scripts, and want to quick set up a workflow which requires the script to be run with different parameters in a particular sequence.
+
+You don't need to pass any command line arguments to `run_script()` if they're not needed.
 
 
-## 7 - Git advice
+## 8 - Git advice
 
 For general Git advice, I've found these resources helpful:
 

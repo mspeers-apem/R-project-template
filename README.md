@@ -22,6 +22,10 @@ TEMPLATE/
 ├── docs/
 │   └── report.txt
 │
+├── logs/
+│   ├── 1_model_fitting.log
+│   └── 2_model_plotting.log
+│
 ├── outputs/
 │   ├── figures/
 │   │   └── fitted_model_plot.png
