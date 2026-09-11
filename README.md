@@ -61,7 +61,7 @@ TEMPLATE/
 The project requires:
 
 - R (>= 4.3.0)
-- RStudio or Positron 
+- RStudio or Positron
 
 ### Required Packages
 
@@ -72,6 +72,7 @@ install.packages(c(
 ))
 
 ```
+
 Or, use `renv::restore()`.
 
 ## Configuration
@@ -94,10 +95,9 @@ This file contains:
 The following datasets are required:
 
 | Dataset | Description |
-|----------|-------------|
+| ---------- | ------------- |
 | Dataset #1 | Some sample locations |
 | ... | ... |
-
 
 ## Workflow
 
@@ -118,8 +118,6 @@ source("scripts/2_model_plotting.R")
 ```
 
 Reads in the fitted model and plots output. Saves plot as a .png.
-
-
 
 ## Outputs
 

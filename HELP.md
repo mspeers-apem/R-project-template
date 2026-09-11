@@ -1,11 +1,12 @@
-# Guidance for using template repository for R projects. 
+# Guidance for using template repository for R projects
 
 ## Overview
 
-This repository is intended to provide general guidance on structuring R projects. There aren't any hard rules, but I've found that organising things in this way helps to make code more maintainable and expandable. 
+This repository is intended to provide general guidance on structuring R projects. There aren't any hard rules, but I've found that organising things in this way helps to make code more maintainable and expandable.
 
 The generic structure of the template is
-```
+
+```text
 TEMPLATE/
 ├── data/
 ├── docs/
@@ -27,11 +28,12 @@ TEMPLATE/
 └── renv.lock
 
 ```
+
 and all other files contain examples of what's discussed here.
 
 ## 1 - Function and script structure
 
-The main idea of this template is to split the definition and execution of functions into separate files, like you would in an R package. This makes scripts more readable and reduces the need for copy and paste, since all of the main methods will be coded in a single place separate from analyses. It's also a lot easier to then find where you've coded a particular method (i.e., in a specific function file) and then change how the method is implemented. 
+The main idea of this template is to split the definition and execution of functions into separate files, like you would in an R package. This makes scripts more readable and reduces the need for copy and paste, since all of the main methods will be coded in a single place separate from analyses. It's also a lot easier to then find where you've coded a particular method (i.e., in a specific function file) and then change how the method is implemented.
 
 Functions go in the R/ folder (like in an R package). Some function files will just have a single function, and others will have a 'main' function and a selection of 'helper' functions which are used by the main function. For example, you might have a main function which fits a custom model, and a helper function which evaluates the log-likelihood. Your file would then look like this:
 
@@ -74,9 +76,9 @@ data = read.csv("data/data.csv")
 model = fit_model(data)
 ```
 
-With this structure, it is easy to go in and modify portions of the code. For example, you could make a quick change to the likelihood function without having to scroll through a long analysis script or change the likelihood in multiple places. 
+With this structure, it is easy to go in and modify portions of the code. For example, you could make a quick change to the likelihood function without having to scroll through a long analysis script or change the likelihood in multiple places.
 
-## 2 - Seperating pre-processing, analysis, and plotting
+## 2 - Separating pre-processing, analysis, and plotting
 
 Functions and scripts should be separated by purpose, such as pre-processing, analysis, and plotting. This keeps methods modular and makes it easier to modify output. For example, you might have function files:
 
@@ -92,9 +94,9 @@ to be used in their respective scripts:
 
 Keeping each step modular in this way makes changing individual components easier. E.g., if you want to adjust plotting parameters you can modify the `plot.R` function file and then rerun the `3_model_plotting.R` script; this avoids needing to rerun the data processing and model fitting steps, and also makes it simpler to find the part you need to modify.
 
-Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section. 
+Of course, running code line-by-line would allow for changes to portions of the analysis; however, I've found that it's easier to make mistakes and lose track of what variables are defined. This leads onto the next section.
 
-## 3 - Configuration file 
+## 3 - Configuration file
 
 Some projects will have lots of hard-coded parameters. These values are difficult to keep track of if they are scattered throughout analysis scripts. The `config.yaml` file can be used to avoid this situation.
 
@@ -104,7 +106,8 @@ The `config.yaml` file allows you to define parameters in a single location and 
 family = "cnorm"
 fit = gam(data, family = family)
 ```
-but then if you want to change the family you need to scroll to that line the analysis script. Additionally, if you want to change the family for multiple models, then you will need to copy and paste this change in multiple locations. 
+
+but then if you want to change the family you need to scroll to that line the analysis script. Additionally, if you want to change the family for multiple models, then you will need to copy and paste this change in multiple locations.
 
 Instead, you can add to `config.yaml`:
 
@@ -125,7 +128,7 @@ now, changing the line in `config.yaml` to `FAMILY: "clognorm"` will change the 
 
 This approach makes it much easier to keep track of and change any variables that need to be changed for simulation studies.
 
-### NOTE: I've found that loading the config package with `library(config)` can break `mgcv::bam`. You can instead just do `cfg = config::get()`.
+### NOTE: I've found that loading the config package with `library(config)` can break `mgcv::bam`. You can instead just do `cfg = config::get()`
 
 ## 4 - File paths
 
@@ -167,6 +170,7 @@ par1 <- args[1]
 par2 <- args[2]
 ...etc
 ```
+
 This will read in command line arguments and set them as parameters to be used in the script. It's also good to check that arguments have actually been passed, and if not set them to their default values (typically as defined in the config file). e.g.,:
 
 ```r
@@ -182,6 +186,7 @@ if (length(commandArgs(trailingOnly = TRUE)) > 0) {
 }
 
 ```
+
 One of the reasons behind setting up command line arguments is explained in the next section.
 
 ## 7 - Wrapper script with logging
@@ -212,13 +217,20 @@ This is useful if you have well-designed modular scripts, and want to quick set 
 
 You don't need to pass any command line arguments to `run_script()` if they're not needed.
 
-
 ## 8 - Git advice
 
 For general Git advice, I've found these resources helpful:
 
 - [Command line help](https://git-scm.com/docs/gittutorial)
 - [RStudio help](https://happygitwithr.com/)
-- [Positron/VScode help](https://code.visualstudio.com/docs/sourcecontrol/overview)
+- [Positron/VS Code help](https://code.visualstudio.com/docs/sourcecontrol/overview)
 
 Particularly, the sections on managing branches and stashes contain good advice for managing conflicts when working with people on the same repository.
+
+## 9 - Positron
+
+Positron is an IDE built for R from VS Code. It has a nice balance of interactive console and data exploration features, and customisability of VS Code.
+
+The [Positron website](https://positron.posit.co/welcome.html?utm_source=google&utm_medium=ppc&utm_campaign=positron-nb&utm_content=welcome&utm_term=positron&gad_source=1&gad_campaignid=23052366186&gclid=Cj0KCQjwzY7VBhDwARIsAFtPvBSWO7R6yAp2QS_MPRbGS1OrP-weYsu-ZW5qwDxs8Q1s2cvDZuqkBcwaAl4PEALw_wcB) gives a nice overview, and I would recommend giving it a try if you want a more up-to-date and customisable alternative to R Studio.
+
+A major advantage of Positron is that it has access to many of VS Code's extensions, which can customise and add features to the IDE. [These examples](https://www.andrewheiss.com/blog/2026/01/13/dsl-positron-workflow/) are a good place to start.
