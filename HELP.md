@@ -31,6 +31,8 @@ TEMPLATE/
 
 and all other files contain examples of what's discussed here.
 
+Running the script `delete_example_files.R` will remove all example files and scripts, readying the template for a new project.
+
 ## 1 - Function and script structure
 
 The main idea of this template is to split the definition and execution of functions into separate files, like you would in an R package. This makes scripts more readable and reduces the need for copy and paste, since all of the main methods will be coded in a single place separate from analyses. It's also a lot easier to then find where you've coded a particular method (i.e., in a specific function file) and then change how the method is implemented.
